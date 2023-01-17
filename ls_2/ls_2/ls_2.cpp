@@ -1,14 +1,14 @@
-﻿// ls_1.cpp : Определяет точку входа для приложения.
+﻿// ls_2.cpp : Определяет точку входа для приложения.
 //
 
 #include "framework.h"
-#include "ls_1.h"
-//#include <string>
+#include "ls_2.h"
+
 #define MAX_LOADSTRING 100
 
 // Глобальные переменные:
 HINSTANCE hInst;                                // текущий экземпляр
-WCHAR szTitle[] = L"Пахарев Урок Первый";                   // Текст строки заголовка
+WCHAR szTitle[] = L"Пахарев Урок 2";                  // Текст строки заголовка
 WCHAR szWindowClass[MAX_LOADSTRING];            // имя класса главного окна
 
 // Отправить объявления функций, включенных в этот модуль кода:
@@ -29,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Инициализация глобальных строк
     //LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_LS1, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_LS2, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // Выполнить инициализацию приложения:
@@ -38,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_LS1));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_LS2));
 
     MSG msg;
 
@@ -73,10 +73,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS1));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS2));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS1);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS2);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -121,22 +121,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - отправить сообщение о выходе и вернуться
 //
 //
-
-
-std::string str = "";
-void CALLBACK tp(HWND hWnd, UINT uMsg, UINT timerId, DWORD dwTime) {
-    switch (uMsg)
-    {
-    case WM_TIMER:
-        static int sec = 0;
-        sec++;
-        str = "Секунд:  ";
-        str += std::to_string(sec);
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    } 
-};
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -158,15 +142,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-
-    case WM_CHAR:
-        SetTimer(hWnd, 1, 1000, (TIMERPROC)&tp);
-        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            TextOutA(hdc,0,0, str.c_str(),str.size());
+            // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
             EndPaint(hWnd, &ps);
         }
         break;
