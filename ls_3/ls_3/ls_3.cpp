@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "ls_3.h"
+#include "TimerEllipce.h"
 
 #define MAX_LOADSTRING 100
 
@@ -122,13 +123,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-
-
 int wWindow = 0;
 int hWindow = 0;
-
-int radius = 100;
-
+TimerEllipce tm;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static int ex1, ey1, ex2, ey2;
@@ -155,15 +152,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
         wWindow = LOWORD(lParam);
         hWindow = HIWORD(lParam);
-
-        ex1 = wWindow / 2 - radius;
-        ey1 = hWindow / 2 - radius;
-        ex2 = wWindow / 2 + radius;
-        ey2 = hWindow / 2 + radius;
         break;
     case WM_CREATE:
         break;
-    case WM_LBUTTONDBLCLK:
+    case WM_LBUTTONUP:
+        tm = TimerEllipce(wWindow/2, hWindow/2, 100);
+        InvalidateRect(hWnd, NULL, TRUE);
         break;
     case WM_RBUTTONDBLCLK:
         break;
@@ -171,7 +165,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            Ellipse(hdc, ex1, ey1, ex2, ey2);
+            tm.show(&hdc);
             // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
             EndPaint(hWnd, &ps);
         }
