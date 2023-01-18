@@ -1,14 +1,14 @@
-﻿// ls_2.cpp : Определяет точку входа для приложения.
+﻿// ls_3.cpp : Определяет точку входа для приложения.
 //
 
 #include "framework.h"
-#include "ls_2.h"
+#include "ls_3.h"
 
 #define MAX_LOADSTRING 100
 
 // Глобальные переменные:
 HINSTANCE hInst;                                // текущий экземпляр
-WCHAR szTitle[] = L"Пахарев Урок 2";                  // Текст строки заголовка
+WCHAR szTitle[MAX_LOADSTRING];                  // Текст строки заголовка
 WCHAR szWindowClass[MAX_LOADSTRING];            // имя класса главного окна
 
 // Отправить объявления функций, включенных в этот модуль кода:
@@ -28,8 +28,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: Разместите код здесь.
 
     // Инициализация глобальных строк
-    //LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_LS2, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_LS3, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // Выполнить инициализацию приложения:
@@ -38,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_LS2));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_LS3));
 
     MSG msg;
 
@@ -73,10 +73,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS2));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS3));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS2);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS3);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -122,25 +122,18 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-int wRect = 0;
-int hRect = 0;
+
 
 int wWindow = 0;
 int hWindow = 0;
 
+int radius = 100;
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    static int ex1, ey1, ex2, ey2;
     switch (message)
     {
-    case WM_CREATE:
-        break;
-    case WM_SIZE:
-        wWindow = LOWORD(lParam);
-        hWindow = HIWORD(lParam);
-
-        wRect = wWindow / 8;
-        hRect = hWindow / 8;
-        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -158,23 +151,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+
+    case WM_SIZE:
+        wWindow = LOWORD(lParam);
+        hWindow = HIWORD(lParam);
+
+        ex1 = wWindow / 2 - radius;
+        ey1 = hWindow / 2 - radius;
+        ex2 = wWindow / 2 + radius;
+        ey2 = hWindow / 2 + radius;
+        break;
+    case WM_CREATE:
+        break;
+    case WM_LBUTTONDBLCLK:
+        break;
+    case WM_RBUTTONDBLCLK:
+        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            HBRUSH hBr = CreateSolidBrush(RGB(0, 0, 0));
-            
-            RECT rt;
-            for (int i = 0; i < 8; i += 2) {
-                for (int j = 0; j < 8; j++) {
-                    int wShift = 0;
-                    if (j%2 == 0) {
-                        wShift = wRect;
-                    }
-                    SetRect(&rt, 0 + (i * wRect) + wShift, 0 + (j * hRect), wRect + (i * wRect) + wShift, hRect + (j * hRect));
-                    FillRect(hdc, &rt, hBr);
-                };
-            };
+            Ellipse(hdc, ex1, ey1, ex2, ey2);
             // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
             EndPaint(hWnd, &ps);
         }
