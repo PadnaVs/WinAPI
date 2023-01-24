@@ -1,11 +1,13 @@
+#define _USE_MATH_DEFINES
 #include "TimerEllipce.h"
 #include "framework.h"
 
 void TimerEllipce::show(HWND* hWnd, HDC* hdc) {
-	SetTimer(*hWnd, 1, 1000, (TIMERPROC)&tickTimer);
 	Ellipse(*hdc, x - r, y - r, x + r, y + r);
-};
-
-void CALLBACK TimerEllipce::tickTimer(HWND hWdn, UINT msg, UINT_PTR idTimer, DWORD sec) {
-
+	POINT pt;
+	MoveToEx(*hdc, x, y, &pt);
+	
+	int xEL = x + cos((a+(s*6)) * M_PI / 180)*r;
+	int yEL = y + sin((a+(s*6)) * M_PI / 180)*r;
+	LineTo(*hdc, xEL, yEL);
 };

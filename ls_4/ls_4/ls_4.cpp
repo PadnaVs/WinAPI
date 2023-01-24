@@ -1,9 +1,12 @@
-﻿// ls_3.cpp : Определяет точку входа для приложения.
+﻿// ls_4.cpp : Определяет точку входа для приложения.
 //
 
+#include "Vector2D.h"
 #include "framework.h"
-#include "ls_3.h"
-#include "TimerEllipce.h"
+#include "ls_4.h"
+
+
+
 
 #define MAX_LOADSTRING 100
 
@@ -30,7 +33,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Инициализация глобальных строк
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_LS3, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_LS4, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // Выполнить инициализацию приложения:
@@ -39,7 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_LS3));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_LS4));
 
     MSG msg;
 
@@ -74,10 +77,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS3));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS4));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS3);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS4);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -123,35 +126,26 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-int wWindow = 0;
-int hWindow = 0;
-TimerEllipce tm;
-
-void CALLBACK tickTimer(HWND hWnd, UINT msg, UINT_PTR idTimer, DWORD sec) {
-    switch (msg)
-    {
-    case WM_TIMER:
-        tm.speed = 1;
-        tm.s += tm.speed;
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    case WM_PAINT:
-    {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-        tm.show(&hWnd, &hdc);
-        // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
-        EndPaint(hWnd, &ps);
-    }
-    break;
-    }
-};
-
+Vector2D v;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    static int ex1, ey1, ex2, ey2;
+    static int wWindow = 0;
+    static int hWindow = 0;
     switch (message)
     {
+    case WM_SIZE:
+        wWindow = LOWORD(lParam);
+        hWindow = HIWORD(lParam);
+        break;
+    case WM_LBUTTONUP:
+        v.xS = LOWORD(lParam);
+        v.yS = HIWORD(lParam);
+        break;
+    case WM_RBUTTONUP:
+        v.xE = LOWORD(lParam);
+        v.yE = HIWORD(lParam);
+        InvalidateRect(hWnd, NULL, TRUE);
+        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -169,29 +163,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-
-    case WM_SIZE:
-        wWindow = LOWORD(lParam);
-        hWindow = HIWORD(lParam);
-        break;
-    case WM_CREATE:
-        break;
-    case WM_LBUTTONUP:
-        tm = TimerEllipce(wWindow/2, hWindow/2, 100);
-        SetTimer(hWnd, 1, 1000, (TIMERPROC)&tickTimer);
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
-    case WM_RBUTTONUP:
-        tm.speed = 0;
-        tm.s = 0;
-        KillTimer(hWnd, 1);
-        InvalidateRect(hWnd, NULL, TRUE);
-        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            tm.show(&hWnd,&hdc);
+            v.show(&hWnd,&hdc);
             // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
             EndPaint(hWnd, &ps);
         }
