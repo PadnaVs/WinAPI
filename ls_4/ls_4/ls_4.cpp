@@ -6,7 +6,7 @@
 #include "ls_4.h"
 
 
-
+double deltaTime = 0;
 
 #define MAX_LOADSTRING 100
 

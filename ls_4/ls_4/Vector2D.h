@@ -19,6 +19,7 @@ public:
 		lenght = 0;
 	}
 	
-	void show(HWND* hWnd, HDC* hdc);
+	void show(HDC* hdc);
+	void setCoords(int ixS, int iyS, int ixE, int iyE);
 };
 

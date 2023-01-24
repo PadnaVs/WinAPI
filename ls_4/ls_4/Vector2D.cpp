@@ -3,8 +3,14 @@
 #pragma once
 #include "framework.h"
 
+void Vector2D::setCoords(int ixS, int iyS, int ixE, int iyE) {
+	xS = ixS;
+	yS = iyS;
+	xE = ixE;
+	yE = iyE;
+};
 
-void Vector2D::show(HWND* hWnd, HDC* hdc) {
+void Vector2D::show(HDC* hdc) {
 	POINT pt;
 	MoveToEx(*hdc, xS, yS, &pt);
 	LineTo(*hdc, xE, yE);
