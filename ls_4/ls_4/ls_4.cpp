@@ -1,7 +1,7 @@
 ﻿// ls_4.cpp : Определяет точку входа для приложения.
 //
 
-#include "Vector2D.h"
+#include "Shar.h"
 #include "framework.h"
 #include "ls_4.h"
 
@@ -126,7 +126,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-Vector2D v;
+Shar shar = Shar(0,0,100);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static int wWindow = 0;
@@ -136,14 +136,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
         wWindow = LOWORD(lParam);
         hWindow = HIWORD(lParam);
+
+        if (!shar.x || !shar.y) {
+            shar.x = wWindow / 2;
+            shar.y = hWindow / 2;
+        }
         break;
     case WM_LBUTTONUP:
-        v.xS = LOWORD(lParam);
-        v.yS = HIWORD(lParam);
+        //shar.xS = LOWORD(lParam);
+        //shar.yS = HIWORD(lParam);
         break;
     case WM_RBUTTONUP:
-        v.xE = LOWORD(lParam);
-        v.yE = HIWORD(lParam);
+        //v.xE = LOWORD(lParam);
+        //v.yE = HIWORD(lParam);
         InvalidateRect(hWnd, NULL, TRUE);
         break;
     case WM_COMMAND:
@@ -167,7 +172,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            v.show(&hWnd,&hdc);
+            shar.show(&hdc);
             // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
             EndPaint(hWnd, &ps);
         }

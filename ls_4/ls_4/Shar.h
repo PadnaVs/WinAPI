@@ -4,11 +4,12 @@
 
 class Shar
 {
-	int x = 0;
-	int y = 0;
 	int r = 0;
 	Vector2D vectorN;
+	int speed = 15;
 public:
+	int x = 0;
+	int y = 0;
 	Shar() {};
 	Shar(int ix, int iy, int ir) {
 		x = ix;
@@ -18,5 +19,6 @@ public:
 	};
 
 	void show(HDC* hdc);
+	void move(int xMove, int yMove);
 };
 
