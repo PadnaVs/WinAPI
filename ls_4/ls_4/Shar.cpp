@@ -22,7 +22,6 @@ void Shar::move(int xMove, int yMove) {
 	};
 	
 	int xP = round(x + cos((as)* M_PI / 180) * speed);
-	//int xP = vectorNMove.xE - vectorNMove.xS
 	int yP = round(y + sin((as)* M_PI / 180) * speed);
 
 	vectorN.setCoords(x, y, xP, yP);
