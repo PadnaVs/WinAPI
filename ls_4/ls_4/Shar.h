@@ -6,8 +6,11 @@ class Shar
 {
 	int r = 0;
 	Vector2D vectorN;
+	Vector2D showVector;
+
 	int speed = 15;
 public:
+	int as = 0;
 	int x = 0;
 	int y = 0;
 	Shar() {};

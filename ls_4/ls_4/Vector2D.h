@@ -11,15 +11,17 @@ public:
 
 	Vector2D() {};
 
-	Vector2D(int ixS, int iyS, int ixE, int iyE, int iL = 0) {
+	Vector2D(int ixS, int iyS, int ixE, int iyE) {
 		xS = ixS;
 		yS = iyS;
 		xE = ixE;
 		yE = iyE;
-		lenght = 0;
 	}
 	
 	void show(HDC* hdc);
 	void setCoords(int ixS, int iyS, int ixE, int iyE);
+
+	Vector2D operator+ (Vector2D);
+	int getAngle();
 };
 

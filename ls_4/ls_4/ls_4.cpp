@@ -126,7 +126,25 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-Shar shar = Shar(0,0,100);
+Shar shar = Shar(0, 0, 100);
+int xMove = 0;
+int yMove = 0;
+
+void CALLBACK tm(HWND hWnd, UINT message, UINT_PTR sec, DWORD) {
+    shar.move(xMove, yMove);
+    InvalidateRect(hWnd, NULL, TRUE);
+    switch (message)
+    {
+    case WM_PAINT:
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        shar.show(&hdc);
+        EndPaint(hWnd, &ps);
+        break;
+    }
+};
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static int wWindow = 0;
@@ -143,10 +161,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_LBUTTONUP:
-        //shar.xS = LOWORD(lParam);
-        //shar.yS = HIWORD(lParam);
+        xMove = LOWORD(lParam);
+        yMove = HIWORD(lParam);
+        shar.as = 0;
+        SetTimer(hWnd, 1, 16, (TIMERPROC)&tm);
+        //shar.
+        //shar.
         break;
     case WM_RBUTTONUP:
+        KillTimer(hWnd, 1);
         //v.xE = LOWORD(lParam);
         //v.yE = HIWORD(lParam);
         InvalidateRect(hWnd, NULL, TRUE);
