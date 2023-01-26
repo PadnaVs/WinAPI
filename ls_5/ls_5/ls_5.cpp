@@ -130,20 +130,7 @@ int yMove = 0;
 
 void CALLBACK tm(HWND hWnd, UINT message, UINT_PTR sec, DWORD nTm) {
     shar.move(xMove, yMove);
-    InvalidateRect(hWnd, NULL, TRUE);
-    switch (message)
-    {
-        case WM_PAINT:
- 
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-        shar.show(hdc);
-        // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
-        EndPaint(hWnd, &ps);
-    
-        break;
-    }
-    
+    InvalidateRect(hWnd, NULL, TRUE);   
 };
 
 int wWindow = 0;

@@ -3,7 +3,7 @@
 
 class Shar
 {
-	int r = 0.f;
+	float r = 0.f;
 	Vector2D pointSrart;
 	Vector2D vectorNaprav;//Вектор направления
 	Vector2D pointMove;

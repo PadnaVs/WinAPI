@@ -5,10 +5,8 @@ void Shar::move(int xMove, int yMove) {
 	pointMove.x = xMove;
 	pointMove.y = yMove;
 	vectorNaprav = pointMove - pointSrart;
-	vectorNaprav.x += 0;
-	vectorNaprav.y += 0;
-	//Vector2D naprMove(((pointMove.x-pointSrart.x)/pointMove.getLenght()  / abs( (pointMove.y - pointSrart.y) / pointMove.getLenght())),
-	//	              (pointMove.y - pointSrart.y)/pointMove.getLenght() / abs(((pointMove.y - pointSrart.y) / pointMove.getLenght()));
+	vectorNaprav.x = vectorNaprav.x / vectorNaprav.getLenght() * r;// - vectorNaprav.x / vectorNaprav.getLenght();
+	vectorNaprav.y = vectorNaprav.y / vectorNaprav.getLenght() * r;// - vectorNaprav.y / vectorNaprav.getLenght();
 };
 
 void Shar::setCoordsStart(int ix, int iy) {
@@ -22,13 +20,13 @@ void Shar::setCoordsStart(int ix, int iy) {
 void Shar::showArrowNp(HDC& hdc) {
 	POINT pt;
 	MoveToEx(hdc, pointSrart.x, pointSrart.y, &pt);
-	LineTo(hdc, vectorNaprav.x+ pointSrart.x, vectorNaprav.y+ pointSrart.y);
+	LineTo(hdc, (vectorNaprav.x + pointSrart.x), (vectorNaprav.y+pointSrart.y));
 };
 
 void Shar::show(HDC& hdc) {
 	Ellipse(hdc, pointSrart.x - r, pointSrart.y - r, pointSrart.x + r, pointSrart.y + r);
 	
 	pointSrart.show(hdc);
-	//vectorNaprav.show(hdc);
+	vectorNaprav.show(hdc);
 	showArrowNp(hdc);
 };
