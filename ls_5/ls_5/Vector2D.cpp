@@ -12,14 +12,12 @@ void Vector2D::show(HDC& hdc) {
 };
 
 Vector2D Vector2D::operator-(Vector2D v) {
-	Vector2D res((x-v.x), (y-v.x));
-	return res;
+	return Vector2D((x - v.x), (y - v.y));
 };
 
 Vector2D Vector2D::Normal() {
 	getLenght();
-	Vector2D res(x / lenght, y / lenght);
-	return res;
+	return Vector2D(x / lenght, y / lenght);
 };
 
 bool Vector2D::operator==(Vector2D v) {

@@ -14,9 +14,9 @@ class Shar
 public:
 	Shar() {};
 	Shar(int ix, int iy, int ir) {
-		pointSrart.x = ix;
-		pointSrart.y = iy;
-		r = ir;
+		pointSrart.x = (float)ix;
+		pointSrart.y = (float)iy;
+		r = (float)ir;
 	};
 
 	void show(HDC&);

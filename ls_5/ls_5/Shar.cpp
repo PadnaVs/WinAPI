@@ -1,13 +1,11 @@
 #include "Shar.h"
 
 void Shar::move(int xMove, int yMove) {
-	pointMove.x = xMove;
-	pointMove.y = yMove;
-	if (pointMove == pointSrart) {
-		return;
-	};
+	pointMove.x = (float)xMove;
+	pointMove.y = (float)yMove;
+	
 	//if(!vectorNaprav.x and !vectorNaprav.y)
-	vectorNaprav = (pointMove - pointSrart).Normal();
+	   vectorNaprav = (pointMove - pointSrart).Normal();
 
 	pointSrart.x += vectorNaprav.x * speed;
 	pointSrart.y += vectorNaprav.y * speed;
@@ -31,8 +29,5 @@ void Shar::showArrowNp(HDC& hdc) {
 
 void Shar::show(HDC& hdc) {
 	Ellipse(hdc, pointSrart.x - r, pointSrart.y - r, pointSrart.x + r, pointSrart.y + r);
-	
-	pointSrart.show(hdc);
-	vectorNaprav.show(hdc);
 	showArrowNp(hdc);
 };
