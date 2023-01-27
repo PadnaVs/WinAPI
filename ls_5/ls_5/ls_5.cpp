@@ -149,7 +149,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_LBUTTONUP:
         xMove = LOWORD(lParam);
         yMove = HIWORD(lParam);
-        shar.changeDir();
+        //shar.changeDir();
         SetTimer(hWnd, 1, 16, (TIMERPROC)&tm);
     case WM_COMMAND:
         {

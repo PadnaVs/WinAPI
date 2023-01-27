@@ -1,14 +1,14 @@
+#define _USE_MATH_DEFINES
 #include "Shar.h"
 
 void Shar::move(int xMove, int yMove) {
 	pointMove.x = (float)xMove;
 	pointMove.y = (float)yMove;
-	
-	//if(!vectorNaprav.x and !vectorNaprav.y)
-	   vectorNaprav = (pointMove - pointSrart).Normal();
 
-	pointSrart.x += vectorNaprav.x * speed;
-	pointSrart.y += vectorNaprav.y * speed;
+	vectorNaprav = (pointMove - pointSrart).Normal();
+	vectorNaprav.getLenght();
+
+	pointSrart += vectorNaprav * speed;
 };
 
 void Shar::changeDir() {
@@ -23,8 +23,15 @@ void Shar::setCoordsStart(int ix, int iy) {
 
 void Shar::showArrowNp(HDC& hdc) {
 	POINT pt;
+	
+	float xEM = vectorNaprav.x * r + pointSrart.x;
+	float yEM = vectorNaprav.y * r + pointSrart.y;
+
 	MoveToEx(hdc, pointSrart.x, pointSrart.y, &pt);
-	LineTo(hdc, (vectorNaprav.x*r + pointSrart.x), (vectorNaprav.y*r+pointSrart.y));
+	LineTo(hdc, (xEM), (yEM));
+
+	Vector2D lLine(20, 0);
+	lLine.rotation(-90);
 };
 
 void Shar::show(HDC& hdc) {

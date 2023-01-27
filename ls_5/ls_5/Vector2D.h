@@ -19,6 +19,13 @@ public:
 	void show(HDC& hdc);
 	Vector2D operator-(Vector2D);
 	Vector2D Normal();
+	float getAngle();
+	void rotation(float);
+
 	bool operator==(Vector2D);
+	bool operator<(Vector2D);
+	Vector2D operator+=(Vector2D);
+	Vector2D operator*(Vector2D);
+	Vector2D operator*(float);
 };
 
