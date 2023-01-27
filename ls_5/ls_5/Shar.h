@@ -8,7 +8,7 @@ class Shar
 	Vector2D vectorNaprav;//Вектор направления
 	Vector2D pointMove;
 
-	float speed = 0.f;
+	float speed = 1.f;
 
 	void showArrowNp(HDC&);
 public:
@@ -22,5 +22,6 @@ public:
 	void show(HDC&);
 	void setCoordsStart(int, int);//Во время создания обьекта на экране
 	void move(int, int);
+	void changeDir();
 };
 

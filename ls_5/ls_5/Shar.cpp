@@ -1,26 +1,32 @@
 #include "Shar.h"
 
-
 void Shar::move(int xMove, int yMove) {
 	pointMove.x = xMove;
 	pointMove.y = yMove;
-	vectorNaprav = pointMove - pointSrart;
-	vectorNaprav.x = vectorNaprav.x / vectorNaprav.getLenght() * r;// - vectorNaprav.x / vectorNaprav.getLenght();
-	vectorNaprav.y = vectorNaprav.y / vectorNaprav.getLenght() * r;// - vectorNaprav.y / vectorNaprav.getLenght();
+	if (pointMove == pointSrart) {
+		return;
+	};
+	//if(!vectorNaprav.x and !vectorNaprav.y)
+	vectorNaprav = (pointMove - pointSrart).Normal();
+
+	pointSrart.x += vectorNaprav.x * speed;
+	pointSrart.y += vectorNaprav.y * speed;
+};
+
+void Shar::changeDir() {
+	vectorNaprav.x = 0;
+	vectorNaprav.y = 0;
 };
 
 void Shar::setCoordsStart(int ix, int iy) {
 	pointSrart.x = ix;
 	pointSrart.y = iy;
-
-	//vectorNaprav.x = ix + r;
-	//vectorNaprav.y = iy;
 };
 
 void Shar::showArrowNp(HDC& hdc) {
 	POINT pt;
 	MoveToEx(hdc, pointSrart.x, pointSrart.y, &pt);
-	LineTo(hdc, (vectorNaprav.x + pointSrart.x), (vectorNaprav.y+pointSrart.y));
+	LineTo(hdc, (vectorNaprav.x*r + pointSrart.x), (vectorNaprav.y*r+pointSrart.y));
 };
 
 void Shar::show(HDC& hdc) {

@@ -18,5 +18,7 @@ public:
 	float getLenght();
 	void show(HDC& hdc);
 	Vector2D operator-(Vector2D);
+	Vector2D Normal();
+	bool operator==(Vector2D);
 };
 
