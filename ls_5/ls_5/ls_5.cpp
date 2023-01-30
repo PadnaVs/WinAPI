@@ -5,6 +5,7 @@
 #include "ls_5.h"
 #include "Shar.h"
 
+
 #define MAX_LOADSTRING 100
 
 // Глобальные переменные:
@@ -123,8 +124,14 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
+
+
 Shar shar(0,0,100);
 
+static Vector2D naprav(2000, 0);
+
+int wWindow = 0;
+int hWindow = 0;
 int xMove = 0;
 int yMove = 0;
 
@@ -132,9 +139,6 @@ void CALLBACK tm(HWND hWnd, UINT message, UINT_PTR sec, DWORD nTm) {
     shar.move(xMove, yMove);
     InvalidateRect(hWnd, NULL, TRUE);   
 };
-
-int wWindow = 0;
-int hWindow = 0;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

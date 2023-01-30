@@ -1,6 +1,6 @@
 ﻿//{{NO_DEPENDENCIES}}
 // Включаемый файл, созданный в Microsoft Visual C++.
-// Используется ls_5.rc
+// Используется ls_5.rc            
 
 #define IDS_APP_TITLE			103
 

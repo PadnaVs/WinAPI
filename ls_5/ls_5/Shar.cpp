@@ -1,6 +1,9 @@
 #define _USE_MATH_DEFINES
 #include "Shar.h"
 
+//#include "resource.h"
+#include "framework.h"
+
 void Shar::move(int xMove, int yMove) {
 	pointMove.x = (float)xMove;
 	pointMove.y = (float)yMove;
@@ -9,7 +12,19 @@ void Shar::move(int xMove, int yMove) {
 	vectorNaprav.getLenght();
 
 	pointSrart += vectorNaprav * speed;
+	//reMove(naprav);
 };
+
+/*void Shar::reMove(Vector2D& naprav) {
+	int wWindow = 958;
+	int hWindow = 988;
+	int a = naprav.getAngle();
+	if(wWindow || hWindow) {
+		if (pointSrart.x > wWindow) {
+			vectorNaprav.rotation(vectorNaprav.getAngle()*2);
+		};	
+	};
+};*/
 
 void Shar::changeDir() {
 	vectorNaprav.x = 0;
@@ -31,7 +46,16 @@ void Shar::showArrowNp(HDC& hdc) {
 	LineTo(hdc, (xEM), (yEM));
 
 	Vector2D lLine(20, 0);
-	lLine.rotation(-90);
+	lLine.rotation(vectorNaprav.getAngle() + 165);
+
+	MoveToEx(hdc, xEM, yEM, &pt);
+	LineTo(hdc, (xEM + lLine.x), (yEM+ lLine.y));
+
+	Vector2D rLine(20, 0);
+	rLine.rotation(vectorNaprav.getAngle() - 165);
+
+	MoveToEx(hdc, xEM, yEM, &pt);
+	LineTo(hdc, (xEM + rLine.x), (yEM + rLine.y));
 };
 
 void Shar::show(HDC& hdc) {

@@ -13,12 +13,16 @@ void Vector2D::show(HDC& hdc) {
 };
 
 float Vector2D::getAngle() {
-	return (atan2((double)(y), (double)(x))) * (180 / M_PI);
+	return (atan2((double)(x), (double)(y))) * (180 / M_PI);
 };
 
 void Vector2D::rotation(float angle) {
-	x = x * cos(angle) - y * sin(angle);
-	y = x * sin(angle) + y * cos(angle);
+	angle *= M_PI / 180;
+	float rx = x * sinf(angle) - y * cosf(angle);
+	float ry = x * cosf(angle) + y * sinf(angle);
+	
+	x = rx;
+	y = ry;
 };
 
 Vector2D Vector2D::operator-(Vector2D v) {

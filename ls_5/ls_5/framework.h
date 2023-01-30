@@ -14,3 +14,4 @@
 #include <memory.h>
 #include <tchar.h>
 #include <cmath>
+//#include "Consts.h"
