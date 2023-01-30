@@ -11,7 +11,7 @@ class Shar
 	float speed = 5.f;
 
 	void showArrowNp(HDC&);
-
+	bool stuck = false;
 public:
 	Shar() {};
 	Shar(int ix, int iy, int ir) {
@@ -22,7 +22,7 @@ public:
 
 	void show(HDC&);
 	void setCoordsStart(int, int);//Во время создания обьекта на экране
-	void move(int, int);
+	void move(Vector2D&);
 	void reMove(Vector2D&);
 	void changeDir();
 };

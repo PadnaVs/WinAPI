@@ -78,7 +78,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_LS5));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_LS5);
+    wcex.lpszMenuName   = NULL;
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -100,7 +100,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Сохранить маркер экземпляра в глобальной переменной
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      0, 0, 958, 988, nullptr, nullptr, hInstance, nullptr);
+      0, 0, 956, 988, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -128,7 +128,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 Shar shar(0,0,100);
 
-static Vector2D naprav(2000, 0);
+static Vector2D naprav(0,0);
 
 int wWindow = 0;
 int hWindow = 0;
@@ -136,7 +136,7 @@ int xMove = 0;
 int yMove = 0;
 
 void CALLBACK tm(HWND hWnd, UINT message, UINT_PTR sec, DWORD nTm) {
-    shar.move(xMove, yMove);
+    shar.move(naprav);
     InvalidateRect(hWnd, NULL, TRUE);   
 };
 
@@ -153,7 +153,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_LBUTTONUP:
         xMove = LOWORD(lParam);
         yMove = HIWORD(lParam);
-        //shar.changeDir();
+         
+        srand(time(NULL));
+        naprav.x = wWindow + rand() % (10000);
+        naprav.y = hWindow + rand() % (10000);
+
+        KillTimer(hWnd, 1);
         SetTimer(hWnd, 1, 16, (TIMERPROC)&tm);
     case WM_COMMAND:
         {

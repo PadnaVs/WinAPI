@@ -4,27 +4,42 @@
 //#include "resource.h"
 #include "framework.h"
 
-void Shar::move(int xMove, int yMove) {
-	pointMove.x = (float)xMove;
-	pointMove.y = (float)yMove;
+void Shar::move(Vector2D &naprav) {
+	pointMove = naprav;
 
 	vectorNaprav = (pointMove - pointSrart).Normal();
 	vectorNaprav.getLenght();
 
 	pointSrart += vectorNaprav * speed;
-	//reMove(naprav);
+    reMove(naprav);
 };
 
-/*void Shar::reMove(Vector2D& naprav) {
+void Shar::reMove(Vector2D& naprav) {
 	int wWindow = 958;
 	int hWindow = 988;
-	int a = naprav.getAngle();
 	if(wWindow || hWindow) {
-		if (pointSrart.x > wWindow) {
-			vectorNaprav.rotation(vectorNaprav.getAngle()*2);
-		};	
+		if (pointSrart.x+r > wWindow)
+		{
+			pointSrart.x = wWindow-r;
+			naprav.x *= -1;
+		}
+		if (pointSrart.x-r < 0)
+		{
+			pointSrart.x = r;
+			naprav.x *= -1;
+		}
+		if (pointSrart.y+r > hWindow)
+		{
+			pointSrart.y = hWindow-r;
+			naprav.y *= -1;
+		}
+		if (pointSrart.y-r < 0)
+		{
+			pointSrart.y = r;
+			naprav.y *= -1;
+		}
 	};
-};*/
+};
 
 void Shar::changeDir() {
 	vectorNaprav.x = 0;

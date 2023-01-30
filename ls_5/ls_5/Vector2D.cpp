@@ -31,6 +31,9 @@ Vector2D Vector2D::operator-(Vector2D v) {
 Vector2D Vector2D::operator*(Vector2D v) {
 	return Vector2D((x * v.x), (y * v.y));
 };
+Vector2D Vector2D::operator+(Vector2D v) {
+	return Vector2D((x + v.x), (y + v.y));
+};
 Vector2D Vector2D::operator*(float s) {
 	return Vector2D((x * s), (y * s));
 };

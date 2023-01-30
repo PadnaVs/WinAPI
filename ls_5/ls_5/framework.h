@@ -14,4 +14,5 @@
 #include <memory.h>
 #include <tchar.h>
 #include <cmath>
-//#include "Consts.h"
+#include <random>
+#include <ctime>
