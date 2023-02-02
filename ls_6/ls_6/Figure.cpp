@@ -7,7 +7,14 @@ void Figure::show(HDC& hdc) {
 	showArrowNp(hdc);
 };
 
-void Figure::move(Vector2D &naprav) {
+void Figure::moveStart() {
+	int x = 1 + rand() % 958;
+	int y = 1 + rand() % 988;
+	naprav.x = x;
+	naprav.y = y;
+};
+
+void Figure::move() {
 	pointMove = naprav;
 
 	if(vectorNaprav.x == 0 and vectorNaprav.y == 0)

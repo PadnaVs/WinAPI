@@ -9,7 +9,14 @@ class GenerationFigures
 	std::vector<Figure*> figures;
 public:
 	GenerationFigures() {};
+	~GenerationFigures() {
+		for (int i = 0; i < figures.size(); i++) {
+			delete figures[i];
+		};
+	}
+	Figure* getLastF();
 	void generationFigure();
+	void moveFigures();
 	void showFigures(HDC&);
 };
 

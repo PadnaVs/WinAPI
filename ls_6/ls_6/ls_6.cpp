@@ -117,7 +117,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     return TRUE;
 }
 
-//
 //  ФУНКЦИЯ: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
 //  ЦЕЛЬ: Обрабатывает сообщения в главном окне.
@@ -125,10 +124,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_COMMAND  - обработать меню приложения
 //  WM_PAINT    - Отрисовка главного окна
 //  WM_DESTROY  - отправить сообщение о выходе и вернуться
-//
-//
-
-
 
 //Shar shar(0, 0, 100);
 
@@ -137,23 +132,27 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 GenerationFigures genF;
 
 void CALLBACK tm(HWND hWnd, UINT message, UINT_PTR sec, DWORD nTm) {
+    genF.moveFigures();
     InvalidateRect(hWnd, NULL, TRUE);
 };
 
+Figure* f;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        SetTimer(hWnd, 1, 16, (TIMERPROC)&tm);
+        break;
     case WM_SIZE:
         wWindow = LOWORD(lParam);
         hWindow = HIWORD(lParam);
         break;
     case WM_LBUTTONUP:
         genF.generationFigure();
-        //srand(time(NULL));
-        //
-        //KillTimer(hWnd, 1);
-        //SetTimer(hWnd, 1, 16, (TIMERPROC)&tm);
+
+        f = genF.getLastF();
+        f->moveStart();
         InvalidateRect(hWnd, NULL, TRUE);
     case WM_COMMAND:
     {

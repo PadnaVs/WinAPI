@@ -8,6 +8,7 @@ protected:
 	Vector2D pointStart;
 	Vector2D vectorNaprav;//Вектор направления
 	Vector2D pointMove;
+	Vector2D naprav;
 
 	float speed = 5.f;
 
@@ -21,9 +22,10 @@ public:
 		r = (float)ir;
 	};
 
+	void moveStart();
 	virtual void show(HDC&);
 	void setCoordsStart(int, int);//Во время создания обьекта на экране
-	void move(Vector2D&);
+	void move();
 	void reMove(Vector2D&);
 	void changeDir();
 };
