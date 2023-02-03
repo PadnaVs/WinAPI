@@ -1,8 +1,10 @@
 #pragma once
 #include "framework.h"
+
 #include "Figure.h"
-//#include "ls_6.cpp"
 #include "Circle.h"
+#include "Rect.h"
+#include "Triangle.h"
 
 class GenerationFigures
 {

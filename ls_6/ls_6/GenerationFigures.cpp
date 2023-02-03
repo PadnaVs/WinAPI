@@ -8,8 +8,26 @@ Figure* GenerationFigures::getLastF() {
 void GenerationFigures::generationFigure() {
 	int x = 958/2;
 	int y = 988/2;
-	Circle c = Circle(x, y, 100);
-	Figure* f = new Circle(x, y, 100);
+
+	int numF = 1 + rand() % 3;
+	
+	Figure* f = 0;
+
+	switch (numF)
+	{
+	case 1:
+		f = new Circle(x, y, 100);
+		break;
+	case 2:
+		f = new Rect(x, y, 100);
+		break;
+	case 3:
+		f = new Triangle(x, y, 100);
+		break;
+	default:
+		return;
+		break;
+	}
 
 	figures.push_back(f);
 };
