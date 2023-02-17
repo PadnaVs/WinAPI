@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="battery.h" />
+    <ClInclude Include="chargeManager.h" />
+    <ClInclude Include="energyBox.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="ls_8_m_p.h" />
     <ClInclude Include="Resource.h" />
@@ -147,6 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="battery.cpp" />
+    <ClCompile Include="chargeManager.cpp" />
+    <ClCompile Include="energyBox.cpp" />
     <ClCompile Include="ls_8_m_p.cpp" />
   </ItemGroup>
   <ItemGroup>

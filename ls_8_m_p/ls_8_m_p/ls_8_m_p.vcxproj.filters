@@ -36,6 +36,12 @@
     <ClInclude Include="battery.h">
       <Filter>Файлы заголовков\battery</Filter>
     </ClInclude>
+    <ClInclude Include="energyBox.h">
+      <Filter>Файлы заголовков\battery</Filter>
+    </ClInclude>
+    <ClInclude Include="chargeManager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ls_8_m_p.cpp">
@@ -43,6 +49,12 @@
     </ClCompile>
     <ClCompile Include="battery.cpp">
       <Filter>Исходные файлы\battery</Filter>
+    </ClCompile>
+    <ClCompile Include="energyBox.cpp">
+      <Filter>Исходные файлы\battery</Filter>
+    </ClCompile>
+    <ClCompile Include="chargeManager.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

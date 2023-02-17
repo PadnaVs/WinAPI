@@ -3,7 +3,7 @@
 
 #include "framework.h"
 #include "ls_8_m_p.h"
-#include "battery.h"
+#include "chargeManager.h"
 
 
 #define MAX_LOADSTRING 100
@@ -124,7 +124,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-battery bt(200,450);
+chargeManager cm(6);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -151,7 +151,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            bt.show(hdc);
+            cm.showElements(hdc);
             EndPaint(hWnd, &ps);
         }
         break;

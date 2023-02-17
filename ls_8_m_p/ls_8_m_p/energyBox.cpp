@@ -2,7 +2,7 @@
 
 void energyBox::show(HDC& hdc) {
 	RECT rt;
-	SetRect(&rt, x-width, y - height, x+width, y + height);
+	SetRect(&rt, x-width/2, y - height/2, x+width/2, y + height/2);
 
 	int r = 0;
 	int g = 0;
@@ -10,19 +10,23 @@ void energyBox::show(HDC& hdc) {
 
 	switch (num)
 	{
-	case 1:
+	case 2:
 		r = 255;
 		break;
-	case 2:
+	case 1:
 		g = 255;
-		b = 255;
+		r = 255;
 		break;
-	case 3:
+	case 0:
 		g = 255;
-		break;
-	default:
 		break;
 	}
 
 	HBRUSH br = CreateSolidBrush(RGB(r, g, b));
+
+	FillRect(hdc, &rt, br);
+};
+
+void energyBox::setCoords(int ix, int iy) {
+	x = ix; y = iy;
 };
