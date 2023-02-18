@@ -130,6 +130,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        SetTimer(hWnd, 1, 36, NULL);
+        break;
+    case WM_TIMER:
+        InvalidateRect(hWnd, NULL, TRUE);
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);

@@ -1,9 +1,6 @@
 #include "energyBox.h"
 
-void energyBox::show(HDC& hdc) {
-	RECT rt;
-	SetRect(&rt, x-width/2, y - height/2, x+width/2, y + height/2);
-
+void energyBox::setColor() {
 	int r = 0;
 	int g = 0;
 	int b = 0;
@@ -22,11 +19,19 @@ void energyBox::show(HDC& hdc) {
 		break;
 	}
 
-	HBRUSH br = CreateSolidBrush(RGB(r, g, b));
+	br = CreateSolidBrush(RGB(r, g, b));
+};
 
-	FillRect(hdc, &rt, br);
+void energyBox::show(HDC& hdc) {
+	if (energy) {
+		RECT rt;
+		SetRect(&rt, x - width / 2, y - height / 2, x + width / 2, y + height / 2);
+		FillRect(hdc, &rt, br);
+	};
 };
 
 void energyBox::setCoords(int ix, int iy) {
 	x = ix; y = iy;
 };
+
+

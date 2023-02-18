@@ -3,6 +3,8 @@
 
 class energyBox
 {
+	HBRUSH br;
+	void setColor();
 protected:
 	int energy = 0;
 
@@ -14,12 +16,13 @@ public:
 	int x = 0;
 	int y = 0;
 
-	energyBox(int inum) { num = inum; };
+	energyBox(int inum) { num = inum; setColor(); };
 	energyBox(int ix, int iy, int ie, int inum) {
 		x = ix;
 		y = iy;
 		energy = ie;
 		num = inum;
+		setColor();
 	};
 
 	void show(HDC& hdc);

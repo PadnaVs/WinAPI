@@ -42,6 +42,9 @@
     <ClInclude Include="chargeManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="charger.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ls_8_m_p.cpp">
@@ -54,6 +57,9 @@
       <Filter>Исходные файлы\battery</Filter>
     </ClCompile>
     <ClCompile Include="chargeManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="charger.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
