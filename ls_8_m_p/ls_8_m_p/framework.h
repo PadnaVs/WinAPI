@@ -15,3 +15,7 @@
 #include <tchar.h>
 #include <vector>
 #include <math.h>
+#include <ctime>
+#include <process.h>
+#include <string>
+#include <functional>
