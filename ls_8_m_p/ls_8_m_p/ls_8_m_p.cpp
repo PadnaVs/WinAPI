@@ -124,14 +124,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-chargeManager cm(6);
-
+//chargeManager cm;
+chargeManager cm;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    
     switch (message)
     {
     case WM_CREATE:
         SetTimer(hWnd, 1, 36, NULL);
+         cm = chargeManager(&hWnd, 6);
         break;
     case WM_TIMER:
         InvalidateRect(hWnd, NULL, TRUE);

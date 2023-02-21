@@ -3,17 +3,11 @@
 #include "battery.h"
 #include "charger.h"
 
-// объявляем необходимые типы
-typedef unsigned long  (__stdcall* ThrdFunc)           (void* arg);          // прототип функции потока
-//typedef unsigned long (ClassMethod)        ();                              // прототип метода класса
-//     // прототип метода класса
-
-// данное объединение позволяет решить несостыковку с типами
-
-
 class chargeManager
 {
-	tThrd tThs[6];
+	//Установка хендела при пустом конструкторе
+	HWND hWnd = GetForegroundWindow();
+	//tThrd tThs[6];
 	//зарядное устройство
 	charger chr;
 	int cx = 110;
@@ -30,13 +24,23 @@ protected:
 	
 public:
 	void startPowerConsumption();
+	chargeManager() {};
 
-	chargeManager(int countBt) {
+	chargeManager(HWND *ihWnd, int countBt) {
+		//Присвоедие дискриптора окна
+		{
+			hWnd = *ihWnd;
+		}
+		//Установка на экран зарядного устройства
 		chr = charger(cx, cy);
+		//Прототипы функции
+		typedef unsigned long(__stdcall* ThrdFunc) (void* arg);//для функции потока
+		typedef void (chargeManager::* ClassMethod)();//для класса
 
+		//для ссылок на оба метода
 		typedef union
 		{
-			(chargeManager::* startPowerConsumption) Method;
+			ClassMethod Method;
 			ThrdFunc Function;
 		}tThrdAddr;
 
@@ -48,6 +52,7 @@ public:
 			unsigned long Id;          // ID потока
 			unsigned long ExitCode;    // код выхода
 		}tThrd;
+
 		for (int i = 0; i < countBt; i++) {
 			int nx = sx + 40*i + 200*i;
 			int ny = sy;
@@ -56,12 +61,8 @@ public:
 
 			tThrd thread;
 			thread.Addr.Method = &chargeManager::startPowerConsumption; // тут главная магия
-			//thread.Addr.Method = &chargeManager::startPowerConsumption; // тут главная магия
-			//thread.Handle = CreateThread(NULL, 0, thread.Addr.Function, this, 0, &thread.Id);
-			//GetExitCodeThread(thread.Handle, &thread.ExitCode);
-			//auto f = [this] { this->startPowerConsumption(); };
-			//_beginthreadex_proc_type pf = (_beginthreadex_proc_type)&f;
-			//_beginthreadex(NULL, 0, pf, &str, 0, NULL);//потоки для разряда батарей.
+			thread.Handle = CreateThread(NULL, 0, thread.Addr.Function, this, 0, &thread.Id);
+			GetExitCodeThread(thread.Handle, &thread.ExitCode);
 		};
 	};
 

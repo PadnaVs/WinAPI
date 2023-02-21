@@ -12,5 +12,5 @@ void chargeManager::chooseEnergyBox() {
 };
 
 void chargeManager::startPowerConsumption() {
-
+	MessageBox(hWnd, L"Запустился поток", NULL, NULL);
 };
