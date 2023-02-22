@@ -16,6 +16,6 @@
 #include <vector>
 #include <math.h>
 #include <ctime>
-#include <process.h>
+#include <thread>
 #include <string>
 #include <functional>

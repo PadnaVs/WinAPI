@@ -6,6 +6,7 @@
 #include "chargeManager.h"
 
 
+
 #define MAX_LOADSTRING 100
 
 // Глобальные переменные:
@@ -123,8 +124,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - отправить сообщение о выходе и вернуться
 //
 //
-
-//chargeManager cm;
 chargeManager cm;
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
