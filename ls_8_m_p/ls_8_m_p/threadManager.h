@@ -1,13 +1,14 @@
 #pragma once
 #include "framework.h"
+#include "battery.h"
 
 class threadManager
 {
-	std::vector<std::thread*> threads;
 public:
 	threadManager() {};
 
-	void createTheard(const std::function<void()> t);
+	void createTheard(const std::function<void()>);
+	void createTheard(void (battery::*)(), battery*);
 	void threadsJoin();
 };				  
 

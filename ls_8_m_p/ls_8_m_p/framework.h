@@ -3,7 +3,6 @@
 //
 
 #pragma once
-
 #include "targetver.h"
 #define WIN32_LEAN_AND_MEAN             // Исключите редко используемые компоненты из заголовков Windows
 // Файлы заголовков Windows
@@ -19,3 +18,6 @@
 #include <thread>
 #include <string>
 #include <functional>
+#include <string>
+#include <mutex>
+#include <sstream>

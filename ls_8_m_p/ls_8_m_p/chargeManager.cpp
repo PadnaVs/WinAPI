@@ -10,8 +10,3 @@ void chargeManager::showElements(HDC& hdc) {
 void chargeManager::chooseEnergyBox() {
 	nChB = rand() % (batterys.size()-1);
 };
-
-void chargeManager::startPowerConsumption() {
-	HWND hwnd = GetForegroundWindow();
-	MessageBox(hwnd, L"Запустился поток", NULL, NULL);
-};

@@ -23,6 +23,7 @@ void energyBox::setColor() {
 };
 
 void energyBox::show(HDC& hdc) {
+	energyBox s = *this;
 	if (energy) {
 		RECT rt;
 		SetRect(&rt, x - width / 2, y - height / 2, x + width / 2, y + height / 2);
@@ -34,4 +35,6 @@ void energyBox::setCoords(int ix, int iy) {
 	x = ix; y = iy;
 };
 
-
+void energyBox::low() {
+	energy = 0;
+};

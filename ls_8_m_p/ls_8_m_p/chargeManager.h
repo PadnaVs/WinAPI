@@ -30,15 +30,19 @@ public:
 
 	chargeManager() {};
 
+	int ts[6];
+
 	chargeManager(HWND *ihWnd, int countBt) {
 		//Установка на экран зарядного устройства
 		chr = charger(cx, cy);
-
 		for (int i = 0; i < countBt; i++) {
 			int nx = sx + 40 * i + 200 * i;
 			int ny = sy;
-			batterys.push_back(new battery(nx, ny));
-			tm.createTheard([&] { startPowerConsumption(); });
+
+			battery* bt = new battery(nx, ny);
+			batterys.push_back(bt);
+
+			tm.createTheard(&battery::low, bt);	
 		};
 	};
 

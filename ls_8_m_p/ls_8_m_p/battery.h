@@ -4,6 +4,7 @@
 
 class battery
 {
+	int timeLow = 1 + rand() % 3;//время разряда батареи
 private:
 	void showEnergyBoxes(HDC&);
 
@@ -13,6 +14,7 @@ protected:
 
 	std::vector<energyBox*> enegryBoxes;
 
+	int enegry = 0;
 public:
 	int x = 0;
 	int y = 0;
@@ -25,6 +27,9 @@ public:
 			int num = i/2;
 			energyBox* enb = new energyBox(num);
 			enegryBoxes.push_back(enb);
+
+			if (enb->energy)
+				enegry++;
 		};
 	};
 	~battery() {
@@ -35,6 +40,7 @@ public:
 
 	void show(HDC& hdc);
 
-	void pushPow(float ie);//для зарядки
+	void charge(float ie);//для зарядки
+	void low();
 };
 

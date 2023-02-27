@@ -13,3 +13,12 @@ void battery::showEnergyBoxes(HDC &hdc) {
 		enegryBoxes[i]->show(hdc);
 	};
 };
+
+void battery::low() {
+	while (enegry) {
+		std::this_thread::sleep_for(std::chrono::seconds(timeLow));
+		int numBox = 5 - (enegry-1);
+		enegryBoxes[numBox]->low();
+		enegry--;
+	};
+};

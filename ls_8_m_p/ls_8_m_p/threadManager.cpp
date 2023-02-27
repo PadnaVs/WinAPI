@@ -1,10 +1,14 @@
 #include "threadManager.h"
 
+
+void threadManager::createTheard(void (battery::*f)(), battery* bt)
+{
+	std::thread* th = new std::thread(f, bt);
+};
+
 void threadManager::createTheard(const std::function<void()> f)
 {
 	std::thread* th = new std::thread(f);
-	//threads.push_back(th);
-	//th.join();
 };
 
 void threadManager::threadsJoin() {

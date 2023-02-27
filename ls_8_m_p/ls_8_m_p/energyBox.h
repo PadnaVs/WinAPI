@@ -6,13 +6,15 @@ class energyBox
 	HBRUSH br;
 	void setColor();
 protected:
-	int energy = 0;
+	
 
 	int width  = 180;
 	int height = 60;
 
 	int num = 0;
 public:
+	int energy = 1;
+
 	int x = 0;
 	int y = 0;
 
@@ -25,7 +27,13 @@ public:
 		setColor();
 	};
 
+	~energyBox() {
+		int i = 0;
+	};
+
 	void show(HDC& hdc);
 	void setCoords(int ix, int iy);
+
+	void low();
 };
 
