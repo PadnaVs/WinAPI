@@ -25,12 +25,6 @@
     <Filter Include="Исходные файлы\charger">
       <UniqueIdentifier>{74861da6-985d-4a66-bd2e-c1086f6fc294}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\mgThrd">
-      <UniqueIdentifier>{67c3cf90-f224-4681-8661-f661eb557cac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\mgThrd">
-      <UniqueIdentifier>{1c19686f-7ced-46b4-9998-f60c02c4b610}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">

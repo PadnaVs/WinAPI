@@ -22,3 +22,13 @@ void battery::low() {
 		enegry--;
 	};
 };
+
+void battery::charge(int ie) {
+	for (int i = 5; i >= 0; i--) {
+		if (!ie) break;
+		if (!enegryBoxes[i]->energy) {
+			enegryBoxes[i]->energy = 1;
+			ie--;
+		}
+	};
+};

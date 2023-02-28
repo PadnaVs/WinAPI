@@ -13,7 +13,7 @@ protected:
 
 	int num = 0;
 public:
-	int energy = 1;
+	int energy = 0;
 
 	int x = 0;
 	int y = 0;

@@ -1,14 +1,14 @@
 #pragma once
 #include "framework.h"
 #include "battery.h"
+#include "charger.h"
 
 class threadManager
 {
 public:
 	threadManager() {};
 
-	void createTheard(const std::function<void()>);
 	void createTheard(void (battery::*)(), battery*);
-	void threadsJoin();
+	void createTheard(void (charger::*)(), charger*);
 };				  
 

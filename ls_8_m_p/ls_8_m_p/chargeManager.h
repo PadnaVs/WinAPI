@@ -12,7 +12,7 @@ class chargeManager
 	//Менеджер управления потоками
 	threadManager tm;
 	//зарядное устройство
-	charger chr;
+	charger* chr;
 	int cx = 110;
 	int cy = 200;
 
@@ -26,15 +26,13 @@ class chargeManager
 protected:
 	
 public:
-	void startPowerConsumption();
-
 	chargeManager() {};
 
 	int ts[6];
 
 	chargeManager(HWND *ihWnd, int countBt) {
 		//Установка на экран зарядного устройства
-		chr = charger(cx, cy);
+		chr = new charger(cx, cy);
 		for (int i = 0; i < countBt; i++) {
 			int nx = sx + 40 * i + 200 * i;
 			int ny = sy;
@@ -44,6 +42,9 @@ public:
 
 			tm.createTheard(&battery::low, bt);	
 		};
+		
+		chr->setBattery(batterys);
+		tm.createTheard(&charger::start, chr);
 	};
 
 	void showElements(HDC&);
