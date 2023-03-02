@@ -5,6 +5,7 @@
 class charger
 {
 	std::vector<battery*> btrsInfo;
+	std::wstring idThread = L"Id Потока: ";
 
 	int energy = 0;
 	bool connectedToBT = false;

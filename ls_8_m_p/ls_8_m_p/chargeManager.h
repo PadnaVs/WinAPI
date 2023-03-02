@@ -14,12 +14,12 @@ class chargeManager
 	//зарядное устройство
 	charger* chr;
 	int cx = 110;
-	int cy = 200;
+	int cy = 170;
 
 	//аккумуляторы
 	std::vector<battery*> batterys;
 	int sx = 110;//начало отриовки акумов
-	int sy = 480;
+	int sy = 450;
 
 	//текущи заряжающийся бокс
 	int nChB = -1;

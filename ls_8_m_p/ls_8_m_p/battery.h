@@ -4,7 +4,9 @@
 
 class battery
 {
-	int timeLow = 1 + rand() % 3;//время разряда батареи
+	std::wstring idThread = L"Id Потока: ";
+
+	int timeLow = 0;//время разряда батареи
 
 	int width = 200;
 	int height = 400;
@@ -42,5 +44,6 @@ public:
 
 	void charge(int ie);//для зарядки
 	void low();
+	void setTimeLow();
 };
 
