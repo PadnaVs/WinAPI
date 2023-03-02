@@ -1,6 +1,7 @@
 #pragma once
 #include "framework.h"
 #include "energyBox.h"
+#include "global.h"
 
 class battery
 {
@@ -12,6 +13,8 @@ class battery
 	int height = 400;
 
 	std::vector<energyBox*> enegryBoxes;
+
+	
 
 	void showEnergyBoxes(HDC&);
 
@@ -25,6 +28,8 @@ public:
 	int x = 0;
 	int y = 0;
 	int enegry = 0;
+	std::mutex mt;
+	bool isCharge = false;
 
 	battery(int ix, int iy) {
 		x = ix;

@@ -54,6 +54,9 @@
     <ClInclude Include="threadManager.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ls_8_m_p.cpp">
@@ -72,6 +75,9 @@
       <Filter>Исходные файлы\charger</Filter>
     </ClCompile>
     <ClCompile Include="threadManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

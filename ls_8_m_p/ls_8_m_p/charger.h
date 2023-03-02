@@ -1,6 +1,7 @@
 #pragma once
 #include "framework.h"
 #include "battery.h"
+#include "global.h"
 
 class charger
 {

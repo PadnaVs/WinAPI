@@ -123,14 +123,21 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 chargeManager cm;
+int wWidth = 0;
+int wHeight = 0;
+
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
     case WM_CREATE:
         SetTimer(hWnd, 1, 36, NULL);
-        cm = chargeManager(&hWnd, 6);
+        cm = chargeManager(5);
         break;
+    case WM_SIZE:
+        wWidth  = LOWORD(lParam);
+        wHeight = HIWORD(lParam);
     case WM_TIMER:
         InvalidateRect(hWnd, NULL, TRUE);
     case WM_COMMAND:
@@ -155,7 +162,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             cm.showElements(hdc);
-            EndPaint(hWnd, &ps);
+
+            std::wstring TITLE = L"Программа эмулирующая зарядную станцию";
+            SIZE size;
+            GetTextExtentPoint32(hdc, TITLE.c_str(), TITLE.size(), &size);
+            TextOut(hdc, wWidth / 2 - size.cx/2, wHeight / 2 - size.cy / 2 - 320, TITLE.c_str(), TITLE.size());
+
+            EndPaint(hWnd, &ps);           
         }
         break;
     case WM_DESTROY:

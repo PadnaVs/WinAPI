@@ -30,7 +30,7 @@ public:
 
 	int ts[6];
 
-	chargeManager(HWND *ihWnd, int countBt) {
+	chargeManager(int countBt) {
 		//Установка на экран зарядного устройства
 		chr = new charger(cx, cy);
 		for (int i = 0; i < countBt; i++) {
@@ -39,8 +39,9 @@ public:
 
 			battery* bt = new battery(nx, ny);
 			batterys.push_back(bt);
-
-			tm.createTheard(&battery::low, bt);	
+			tm.createTheard(&battery::low, bt);
+			std::unique_lock<std::mutex>* ul = new std::unique_lock<std::mutex>();
+			global::mts.push_back(ul);
 		};
 		
 		chr->setBattery(batterys);

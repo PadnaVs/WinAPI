@@ -36,7 +36,9 @@ void charger::show(HDC& hdc) {
 		Rectangle(hdc, x - rw / 2 + shift, y + height / 2, x + rw / 2 + shift, y + rh + height / 2);
 		shift = 10;
 		Rectangle(hdc, x - rw / 2 + shift, y + height / 2, x + rw / 2 + shift, y + rh + height / 2);
-	}
+		DeleteObject(hbr);
+		DeleteObject(hPen);
+	}				 
 };
 
 void charger::move(int mx, int my) {
@@ -54,11 +56,11 @@ void charger::start() {
 	std::stringstream ss;
 	ss << std::this_thread::get_id();
 	int id = std::stoi(ss.str());
-
 	idThread += std::to_wstring(id);
 
 	int numBt = -1;
 	while (true) {
+		
 		if (!energy) {
 			setEnergy();
 		} else if (energy && !connectedToBT && !moved) {
@@ -74,23 +76,23 @@ void charger::start() {
 };
 
 void charger::charge(int numBt) {
-	std::mutex mt;
+	srand(time(NULL));
 	int secCh = 1 + rand() % 2;
+	btrsInfo[numBt]->mt.lock();
 	std::this_thread::sleep_for(std::chrono::seconds(secCh));
 	btrsInfo[numBt]->setTimeLow();
-
-	mt.lock();
 	btrsInfo[numBt]->charge(energy);
 	energy -= energy;
-	mt.unlock();
-
 	connectedToBT = false;
+	btrsInfo[numBt]->isCharge = false;
+	btrsInfo[numBt]->mt.unlock();
 };
 
 void charger::moveToBT(int numBt) {
 	if (x == btrsInfo[numBt]->x) {
 		moved = false;
 		connectedToBT = true;
+		btrsInfo[numBt]->isCharge = true;
 		return;
 	};
 
