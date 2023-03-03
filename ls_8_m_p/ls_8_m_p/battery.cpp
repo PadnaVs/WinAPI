@@ -19,31 +19,27 @@ void battery::showEnergyBoxes(HDC &hdc) {
 };
 
 void battery::low() {
-	
 	std::stringstream ss;
 	ss << std::this_thread::get_id();
 	int id = std::stoi(ss.str());
 	idThread += std::to_wstring(id);
 	
 	while (true) {
-		if (!enegry || isCharge) {
+		if (!enegry) {
 			continue;
 		}
-		int k = 0;
-		for (int i = 0; i < 6; i++) {
-			if (enegryBoxes[i]->energy)
-				k++;
-		};
-		if (k != enegry) {
-			int s = 0;
-		};
-
-		mt.lock();
+		try {
+			mt.lock();
+			int numBox = 5 - (enegry - 1);
+			enegryBoxes[numBox]->low();
+			enegry--;
+			mt.unlock();
+		}
+		catch (const char* msg) {
+			HWND hWnd = GetDesktopWindow();
+			MessageBox(hWnd, (LPWSTR)msg, MB_OK, MB_ICONERROR);
+		}
 		std::this_thread::sleep_for(std::chrono::seconds(timeLow));
-		int numBox = 5 - (enegry - 1);
-		enegryBoxes[numBox]->low();
-		enegry--;
-		mt.unlock();
 	};
 };
 
@@ -52,13 +48,18 @@ void battery::setTimeLow() {
 };
 
 void battery::charge(int ie) {
-	int e = ie;
+	if (enegry + ie > 6) {
+		enegry = 6;
+	}
+	else {
+		enegry += ie;
+	}
+
 	for (int i = 5; i >= 0; i--) {
-		if (!e) break;
+		if (!ie) break;
 		if (!enegryBoxes[i]->energy) {
 			enegryBoxes[i]->energy = 1;
-			e--;
+			ie--;
 		}
-	};
-	enegry = ie;	
+	};	
 };

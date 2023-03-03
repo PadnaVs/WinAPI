@@ -133,7 +133,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         SetTimer(hWnd, 1, 36, NULL);
-        cm = chargeManager(5);
+        cm = chargeManager(6);
         break;
     case WM_SIZE:
         wWidth  = LOWORD(lParam);
@@ -166,7 +166,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             std::wstring TITLE = L"Программа эмулирующая зарядную станцию";
             SIZE size;
             GetTextExtentPoint32(hdc, TITLE.c_str(), TITLE.size(), &size);
-            TextOut(hdc, wWidth / 2 - size.cx/2, wHeight / 2 - size.cy / 2 - 320, TITLE.c_str(), TITLE.size());
+            TextOut(hdc, wWidth / 2 - size.cx/2, size.cy + 10, TITLE.c_str(), TITLE.size());
 
             EndPaint(hWnd, &ps);           
         }

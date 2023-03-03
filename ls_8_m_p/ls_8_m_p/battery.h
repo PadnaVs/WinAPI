@@ -29,7 +29,6 @@ public:
 	int y = 0;
 	int enegry = 0;
 	std::mutex mt;
-	bool isCharge = false;
 
 	battery(int ix, int iy) {
 		x = ix;

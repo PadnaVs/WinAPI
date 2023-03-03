@@ -84,7 +84,6 @@ void charger::charge(int numBt) {
 	btrsInfo[numBt]->charge(energy);
 	energy -= energy;
 	connectedToBT = false;
-	btrsInfo[numBt]->isCharge = false;
 	btrsInfo[numBt]->mt.unlock();
 };
 
@@ -92,7 +91,6 @@ void charger::moveToBT(int numBt) {
 	if (x == btrsInfo[numBt]->x) {
 		moved = false;
 		connectedToBT = true;
-		btrsInfo[numBt]->isCharge = true;
 		return;
 	};
 
