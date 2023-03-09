@@ -17,12 +17,16 @@ class chargeManager
 	int cy = 170;
 
 	//аккумуляторы
-	std::vector<battery*> batterys;
+	
+
 	int sx = 110;//начало отриовки акумов
 	int sy = 450;
 
 	//текущи заряжающийся бокс
 	int nChB = -1;
+
+	std::vector<battery*> batterys;
+
 protected:
 	
 public:
@@ -48,6 +52,11 @@ public:
 		tm.createTheard(&charger::start, chr);
 	};
 
+	~chargeManager() {
+		for (int i = 0; i < batterys.size(); i++) {
+			batterys.clear();
+		};
+	};
 	void showElements(HDC&);
 	void chooseEnergyBox();
 };
