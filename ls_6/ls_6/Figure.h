@@ -21,6 +21,7 @@ public:
 		pointStart.y = (float)iy;
 		r = (float)ir;
 	};
+	virtual ~Figure() {};
 
 	void moveStart();
 	virtual void show(HDC&);
