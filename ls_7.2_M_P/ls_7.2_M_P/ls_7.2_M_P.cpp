@@ -1,5 +1,6 @@
 ﻿// ls_7.2_M_P.cpp : Определяет точку входа для приложения.
-#pragma warning(disable : 4996)
+//
+
 #include "framework.h"
 #include "ls_7.2_M_P.h"
 
@@ -120,58 +121,43 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - отправить сообщение о выходе и вернуться
 //
 //
-HANDLE hTimer;
-unsigned __stdcall MyThread(void* param)
-{
-    TCHAR str[30];
-    SYSTEMTIME tm;
-    FILETIME localTime;
-    WaitForSingleObject(hTimer, INFINITE);
-    GetSystemTime(&tm);
-    SystemTimeToFileTime(&tm, &localTime);
-    FileTimeToLocalFileTime(&localTime, &localTime);
-    FileTimeToSystemTime(&localTime, &tm);
-    _stprintf(str, _T("Дата %2u.%2u.%4u Время %2u:%2u:%2u"), tm.wDay,
-        tm.wMonth, tm.wYear, tm.wHour, tm.wMinute, tm.wSecond);
-    MessageBox((HWND)param, str, _T("Включился ожидаемый таймер"), MB_OK |
-        MB_ICONHAND);
-    return 0;
-}
-////////////////////////////////////////////////////////////////
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    static HANDLE hThread;
-    SYSTEMTIME sysTime = { 2010, 5, 2, 5, 9, 04, 0, 0 };
-    FILETIME localTime, utcTime;
-    LARGE_INTEGER* lTime;
     switch (message)
     {
-    case WM_CREATE:
-        hTimer = CreateWaitableTimer(NULL, FALSE, NULL);
-        SystemTimeToFileTime(&sysTime, &localTime);
-        LocalFileTimeToFileTime(&localTime, &utcTime);
-        lTime = (LARGE_INTEGER*)&utcTime;
-        SetWaitableTimer(hTimer, lTime, 0, NULL, NULL, FALSE);
-        hThread = (HANDLE)_beginthreadex(NULL, 0, MyThread, hWnd, 0, NULL);
-        break;
     case WM_COMMAND:
-        switch (LOWORD(wParam))
         {
-        case IDM_EXIT: DestroyWindow(hWnd); break;
-        default: return DefWindowProc(hWnd, message, wParam, lParam);
+            int wmId = LOWORD(wParam);
+            // Разобрать выбор в меню:
+            switch (wmId)
+            {
+            case IDM_ABOUT:
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+                break;
+            case IDM_EXIT:
+                DestroyWindow(hWnd);
+                break;
+            default:
+                return DefWindowProc(hWnd, message, wParam, lParam);
+            }
+        }
+        break;
+    case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+            // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
+            EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
-        CloseHandle(hThread);
-        CancelWaitableTimer(hTimer);
         PostQuitMessage(0);
         break;
-    default: return DefWindowProc(hWnd, message, wParam, lParam);
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
 }
-
 
 // Обработчик сообщений для окна "О программе".
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
